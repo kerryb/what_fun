@@ -11,8 +11,6 @@ defmodule WhatFun.Application do
       WhatFunWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:what_fun, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: WhatFun.PubSub},
-      # Start the Finch HTTP client for sending emails
-      {Finch, name: WhatFun.Finch},
       # Start a worker by calling: WhatFun.Worker.start_link(arg)
       # {WhatFun.Worker, arg},
       # Start to serve requests, typically the last entry

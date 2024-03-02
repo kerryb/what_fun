@@ -7,12 +7,6 @@ config :what_fun, WhatFunWeb.Endpoint,
   secret_key_base: "wumJyK6Vp6w9u5euBD8VZ2hURw8a/i+9vC+EBrAxuxfBOEJPmk7X3l9R7Hvxwpe2",
   server: false
 
-# In test we don't send emails.
-config :what_fun, WhatFun.Mailer, adapter: Swoosh.Adapters.Test
-
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
-
 # Print only warnings and errors during test
 config :logger, level: :warning
 
