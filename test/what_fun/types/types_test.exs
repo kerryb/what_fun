@@ -6,7 +6,7 @@ defmodule WhatFun.TypesTest do
 
   describe "WhatFun.Types" do
     test "includes types from the standard library" do
-      assert %{module: String, type: :t} in Types.all()
+      assert "String.t" in Types.all()
     end
   end
 end

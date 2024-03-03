@@ -599,16 +599,15 @@ defmodule WhatFunWeb.CoreComponents do
   end
 
   attr :field, FormField, required: true
+  attr :label, :string, required: false, default: nil
+  attr :rest, :global
 
   def live_select(assigns) do
-    assigns =
-      assigns
-      |> assign(:errors, Enum.map(assigns.field.errors, &translate_error(&1)))
-      |> assign(:live_select_opts, assigns_to_attributes(assigns, [:errors, :label]))
+    assigns = assign(assigns, :errors, Enum.map(assigns.field.errors, &translate_error(&1)))
 
     ~H"""
     <div phx-feedback-for={@field.name}>
-      <.label for={@field.id}><%= @label %></.label>
+      <.label :if={@label} for={@field.id}><%= @label %></.label>
       <LiveSelect.live_select
         field={@field}
         text_input_class={[
@@ -618,7 +617,7 @@ defmodule WhatFunWeb.CoreComponents do
           "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5",
           @errors != [] && "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
         ]}
-        {@live_select_opts}
+        {@rest}
       />
 
       <.error :for={msg <- @errors}><%= msg %></.error>
