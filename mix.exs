@@ -34,6 +34,7 @@ defmodule WhatFun.MixProject do
     [
       {:bandit, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
+      {:phoenix_ecto, "~> 4.0"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
