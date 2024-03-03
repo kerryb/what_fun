@@ -69,7 +69,8 @@ defmodule WhatFun.MixProject do
         "tailwind what_fun --minify",
         "esbuild what_fun --minify",
         "phx.digest"
-      ]
+      ],
+      test: "test --no-start"
     ]
   end
 end
