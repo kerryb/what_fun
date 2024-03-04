@@ -18,7 +18,6 @@ defmodule WhatFunWeb.CoreComponents do
 
   import WhatFunWeb.Gettext
 
-  alias Phoenix.HTML.FormField
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -595,33 +594,6 @@ defmodule WhatFunWeb.CoreComponents do
   def icon(%{name: "hero-" <> _} = assigns) do
     ~H"""
     <span class={[@name, @class]} />
-    """
-  end
-
-  attr :field, FormField, required: true
-  attr :label, :string, required: false, default: nil
-  attr :rest, :global
-
-  def live_select(assigns) do
-    assigns = assign(assigns, :errors, Enum.map(assigns.field.errors, &translate_error(&1)))
-
-    ~H"""
-    <div phx-feedback-for={@field.name}>
-      <.label :if={@label} for={@field.id}><%= @label %></.label>
-      <LiveSelect.live_select
-        field={@field}
-        text_input_class={[
-          "mt-2 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
-          "text-zinc-900 focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
-          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
-          "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5",
-          @errors != [] && "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
-        ]}
-        {@rest}
-      />
-
-      <.error :for={msg <- @errors}><%= msg %></.error>
-    </div>
     """
   end
 

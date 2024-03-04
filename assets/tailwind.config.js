@@ -9,7 +9,8 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/what_fun_web.ex",
-    "../lib/what_fun_web/**/*.*ex"
+    "../lib/what_fun_web/**/*.*ex",
+    '../deps/live_select/lib/live_select/component.*ex'
   ],
   theme: {
     extend: {

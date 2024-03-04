@@ -2,6 +2,8 @@ defmodule WhatFunWeb.HomeLive do
   @moduledoc false
   use WhatFunWeb, :live_view
 
+  import LiveSelect
+
   alias Ecto.Changeset
   alias Phoenix.LiveView
   alias WhatFun.Query
