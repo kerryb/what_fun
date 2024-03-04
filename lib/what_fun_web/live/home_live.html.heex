@@ -1,7 +1,7 @@
-<.form for={@form} phx-change="change">
+<.simple_form for={@form} phx-change="change">
   <.live_select
     field={@form[:arg]}
     phx-focus="clear"
     placeholder="Start typing to search for a type"
   />
-</.form>
+</.simple_form>
