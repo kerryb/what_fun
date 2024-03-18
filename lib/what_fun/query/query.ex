@@ -5,7 +5,9 @@ defmodule WhatFun.Query do
 
   use Ecto.Schema
 
+  alias WhatFun.Arg
+
   embedded_schema do
-    field(:arg, :string)
+    embeds_many(:arg, Arg, on_replace: :delete)
   end
 end
