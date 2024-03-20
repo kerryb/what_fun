@@ -1,7 +1,17 @@
 <.simple_form for={@form} phx-change="change">
-  <.live_select
-    field={@form[:arg]}
-    phx-focus="clear"
-    placeholder="Start typing to search for a type"
-  />
+  <div id="args" phx-hook="SortableInputsFor" class="space-y-2">
+    <.inputs_for :let={arg} field={@form[:args]}>
+      <input type="hidden" name="query[args_sort][]" value={arg.index} />
+      <.input type="text" field={arg[:type]} placeholder="arg" class="w-80" />
+      <button name="query[args_drop][]" value={arg.index} phx-click={JS.dispatch("change")}>
+        <.icon name="hero-x-mark" class="w-6 h-6 relative top-2" />
+      </button>
+    </.inputs_for>
+  </div>
+
+  <input type="hidden" name="query[args_drop][]" />
+
+  <button type="button" name="query[args_sort][]" value="new" phx-click={JS.dispatch("change")}>
+    add more
+  </button>
 </.simple_form>

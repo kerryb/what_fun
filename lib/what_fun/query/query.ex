@@ -5,9 +5,34 @@ defmodule WhatFun.Query do
 
   use Ecto.Schema
 
-  alias WhatFun.Arg
+  import Ecto.Changeset
 
   embedded_schema do
-    embeds_many(:arg, Arg, on_replace: :delete)
+    field(:name, :string)
+
+    embeds_many :args, Arg, on_replace: :delete do
+      field(:type, :string)
+    end
+  end
+
+  def changeset(query, attrs) do
+    IO.inspect(attrs, label: :attrs)
+
+    query
+    |> cast(attrs, [:name])
+    |> cast_embed(:args,
+      with: &arg_changeset/2,
+      sort_param: :args_sort,
+      drop_param: :args_drop
+    )
+    |> dbg()
+  end
+
+  def arg_changeset(arg, attrs) do
+    IO.inspect(attrs, label: :arg_attrs)
+
+    arg
+    |> cast(attrs, [:type])
+    |> dbg()
   end
 end
