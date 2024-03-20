@@ -4,16 +4,14 @@ defmodule WhatFunWeb.HomeLive do
 
   import LiveSelect
 
-  alias Ecto.Changeset
   alias Phoenix.LiveView
-  alias WhatFun.Query
   alias WhatFun.Types
 
   require Logger
 
   @impl LiveView
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, types: Types.all(), form: %Query{} |> Changeset.change() |> to_form())}
+    {:ok, assign(socket, types: Types.all(), form: to_form(%{arg: ""}))}
   end
 
   @impl LiveView
