@@ -21,13 +21,34 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
+import Sortable from "../vendor/sortable"
 import live_select from "live_select"
+
+const hooks = {
+  SortableInputsFor: {
+    mounted(){
+      let group = this.el.dataset.group
+      let sorter = new Sortable(this.el, {
+        group: group ? {name: group, pull: true, put: true} : undefined,
+        animation: 150,
+        dragClass: "drag-item",
+        ghostClass: "drag-ghost",
+        handle: "[data-handle]",
+        forceFallback: true,
+        onEnd: e => {
+          this.el.closest("form").querySelector("input").dispatchEvent(new Event("input", {bubbles: true}))
+        }
+      })
+    }
+  },
+  live_select
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
-  hooks: live_select
+  hooks: hooks
 })
 
 // Show progress bar on live navigation and form submits
